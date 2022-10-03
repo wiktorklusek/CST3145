@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
+        <title>Flash Card App</title>
+    </head>
+    <body>
+
+        <div id="app">
+            <!-- <h1>{{ deckName }}</h1> -->
+            <h1 v-text="deckName"></h1>
+
+            <!-- <div class="user-input"> -->
+                <!-- Type something: <input type="text" :value="userInput"> -->
+                <!-- Type something: <input type="text" v-model="userInput"> -->
+            <!-- </div> -->
+
+
+            <!-- <div v-on:click="flipped = !flipped" class="card"> -->
+            <div @click="flipped = !flipped" class="card">
+
+                <!-- <h2>Item</h2> -->
+                <!-- <h2 v-text="flipped ? '' : cards[0].front"></h2> -->
+                <!-- <h2 v-text="userInput == 'flip' ? '' : cards[0].front"></h2> -->
+                <h2 v-text="flipped ? '' : cards[index].front"></h2>
+
+                <!-- <div>Description</div> -->
+                <!-- <div v-html="flipped ? cards[0].back : ''"></div> -->
+                <!-- <div v-html="userInput == 'flip' ? cards[0].back : ''"></div> -->
+                <div v-html="flipped ? cards[index].back : ''"></div>
+
+            </div>
+
+            <div class="navigation">
+                <button @click="move(-1)" type="button">&#8592;</button>
+                <button @click="move(1)" type="button">&#8594;</button>
+            </div>
+
+            <!-- <a href="https://v3.vuejs.org/guide">read more</a> -->
+            <!-- <a v-bind:href="readMoreUrl">read more</a> -->
+            <a :href="readMoreUrl">read more</a>
+
+        </div>
+
+        <script src="data.js"></script>
+        <script src="https://unpkg.com/vue@3.0.7/dist/vue.global.js"></script>
+        <script>
+            const FlashCardApp = {
+                data() {
+                    return {
+                        deckName: 'Vue.js Fundamentals',
+                        cards,
+                        index: 0,
+                        flipped: false,
+                        readMoreUrl: 'https://v3.vuejs.org/guide',
+                        userInput: 'default'
+                    };
+                },
+                methods: {
+                    move(change) {
+                       if (this.cards[this.index + change]) 
+                        this.index += change;
+                        this.flipped = false; 
+                       }
+                    }
+
+        };
+
+            const app = Vue.createApp(FlashCardApp).mount('#app');
+        </script>
+    </body>
+</html>
