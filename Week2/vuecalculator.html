@@ -10,6 +10,10 @@
 
     <div id="app">
         <!-- input values inside of the paragraphs -->
+        <p>x <input v-model="x"></p>
+        <p>y <input v-model="y"></p>
+        <!-- span is just like div but it is all about the INLINE -->
+        <p>= <span v-text="result"></span></p>
     </div>
 
     <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
@@ -21,9 +25,23 @@
 
         var calculate = new Vue({
             el: '#app',
-            data: {},
-            computed: {},
-            methods: {}
+            data: {
+                x: 0,
+                y: 0,
+                lastResult: 0
+            },
+            // computed is cacched and will be recalculated if the dom will change
+            computed: {
+                result: function() {
+                    let x = parseFloat(this.x);
+                    let y = parseFloat(this.y);
+                    this.lastResult = x+y;
+                    return this.lastResult;
+                }
+            },
+            // methods are just like js functions
+            methods: {} 
+
         });
 
     </script>
