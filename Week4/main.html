@@ -39,6 +39,60 @@
         <div v-else>
             <!-- the code for the checkout page -->
             <h1>Checkout Page</h1>
+            <p>
+                <Strong>First name: </Strong>
+                <input v-model="order.firstName"/>
+            </p>
+            <p>
+                <Strong>Last name: </Strong>
+                <input v-model="order.lastName"/>
+            </p>
+
+            <p><strong>Address: </strong> <input v-model="order.address"/></p>
+
+            <p><strong>City: </strong> <input v-model="order.city"/></p>
+
+            <p>
+                <strong>State:</strong>
+                <select v-model="order.state">
+                    <option disabled value="">State</option>
+                    <option>AL</option>
+                    <option>AR</option>
+                    <option>CA</option>
+                    <option>NV</option>
+                </select>
+            </p>
+
+            <p><strong>Zip Code:</strong> <input v-model="order.zip"/></p>
+
+<p>
+    <input type="checkbox" value="true" v-model="order.gift">
+    <label for="gift">Ship as a gift?</label>
+</p>
+
+<p>
+    <input type="radio" id="home" value="Home" v-model="order.method">
+    <label for="home">Home</label>
+    <input type="radio" id="business" value="Business" v-model="order.method">
+    <label for="business">Business</label>
+</p>
+
+            <h2>Order information</h2>
+            <p>First name: {{order.firstName}}</p>
+            <p>Last name: {{order.lastName}}</p>
+            <p>Address: {{order.address}}</p>
+            <p>City: {{order.city}}</p>
+            <p>Zip: {{order.zip}}</p>
+            <p>State: {{order.state}}</p>
+            <p>Method: {{order.method}}</p>
+            <p>Gift: {{order.gift}}</p>
+
+            <button @click="submitForm">Place order</button>
+
+
+
+            </p>
+
         </div>
 
     </div>
@@ -63,7 +117,17 @@
                         image: "product-fullsize.png",
                         availableInventory: 5
                     },
-                    cart: []
+                    cart: [],
+                    order: {
+                        firstName: '',
+                        lastName: '',
+                        address: '',
+                        city: '',
+                        state: '',
+                        zip: '1234',
+                        method: 'Home',
+                        gift: false
+                    }
                 },
                 methods: {
                     addItem() {
@@ -71,6 +135,9 @@
                     },
                     showCheckout() {
                         this.showProduct = this.showProduct ? false : true;
+                    },
+                    submitForm() {
+                        alert('Order submitted!')
                     }
                 },
                 computed: {
@@ -80,6 +147,7 @@
                     canAddToCart() {
                         return this.product.availableInventory > this.cartItemCount;
                     }
+
                 }
             })
 
