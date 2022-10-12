@@ -4,9 +4,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Math lessons</title>
+
+    <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.js">
+
+    </script>
 </head>
 <body>
-    
+    <div id="app">
+
+        <div>
+        <h2 v-text="product.title"></h2>
+        <h2 v-text="product.location"></h2>
+        <img v-bind:src="product.image" alt="Math logo">
+        <p v-html="product.description"></p>
+        <p>{{ product.price }}</p>
+
+    </div>
+
+    </div>
+
+    <script type="text/javascript">
+      let webstore = new Vue({
+        el: '#app', // mounting point selector, ID
+        data: {
+            product: {
+                id: '1001',
+                title: 'Math',
+                location: 'London',
+                description: 'Calculus for beginners',
+                price: '100',
+                image: 'mathlogomedium.png',
+                lessonAvailability: ''
+            }
+        }
+      });
+    </script>
 </body>
 </html>
