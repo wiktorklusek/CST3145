@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo Pet Depot</title>
     <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
-    
+    <script src="products.js"></script>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css " integrity="sha384- BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.js">
 </script>
@@ -45,10 +46,16 @@
 <span class="inventory-message" v-else>Buy now!</span>
 
 <div class="rating">
+
     <!-- <span v-for="n in 5"> -->
-    <span v-bind:class="{'rating-active': checkRating(n)}" v-for="n in 5">
-         ✩
-    </span>
+
+    <!-- <span v-bind:class="{'rating-active': checkRating(n)}" v-for="n in 5">
+         ✩⭑
+    </span> -->
+
+    <span v-for="n in product.rating">⭑</span>
+    <span v-for="n in 5-product.rating">✩</span>
+
 </div>
 
         <!-- <button disabled v-else>Out of stock</button> -->
@@ -133,15 +140,15 @@
                 data: {
                     name: 'Pet Depot',
                     showProduct: true,
-                    // product: {
-                    //     id: 1001,
-                    //     title: "Cat Food, 25lb bag",
-                    //     description: "A 25 pound bag of <em>irresistable</em>," + " organic goodnes for your cat.",
-                    //     price: 2000,
-                    //     image: "product-fullsize.png",
-                    //     availableInventory: 5,
-                    //     rating: 3
-                    // },
+                    product: {
+                        id: 1001,
+                        title: "Cat Food, 25lb bag",
+                        description: "A 25 pound bag of <em>irresistable</em>," + " organic goodnes for your cat.",
+                        price: 2000,
+                        image: "product-fullsize.png",
+                        availableInventory: 5,
+                        rating: 3
+                    },
                     cart: [],
                     order: {
                         firstName: '',
