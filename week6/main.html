@@ -27,7 +27,8 @@
 
         <main>
         <div v-if="showProduct">
-            <div v-for="product in products">
+            <!-- <div v-for="product in products"> -->
+            <div v-for="product in sortedProducts">
                 <figure>
                     <img v-bind:src="product.image" alt="pet food">
                 </figure>
@@ -50,6 +51,11 @@
 <span class="inventory-message" v-if="itemLeft(product) === 0">All out!</span>
 <span class="inventory-message" v-else-if="itemLeft(product) < 5">Only {{itemLeft(product)}} left!</span>
 <span class="inventory-message" v-else>Buy now!</span> 
+
+<!-- <span class="inventory-message" v-if="product.availableInventory === cartCount(product.id)">All out!</span>
+<span class="inventory-message" v-else-if="product.availableInventory - carCount(product.id) < 5">Only {{product.availableInventory - carCount(product.id}} left!</span>
+<span class="inventory-message" v-else>Buy now!</span>  -->
+
 </div>
         </div>
         <div v-else>
@@ -153,7 +159,8 @@
                 },
                 methods: {
                     addItem(product) {
-                        this.cart.push ( this.product.id );
+                        this.cart.push (product.id); // WAS NOT WORKING WITH this.product.id
+                        // this.cart.push ( this.product.id ); BEFORE
                     },
                     showCheckout() {
                         this.showProduct = this.showProduct ? false : true;
@@ -180,6 +187,7 @@
                         for(let i = 0; i < this.cart.length; i++) {
                             if(this.cart[i] === id) {
                                 count++;
+                                
                             }
                         }
                         return count;
@@ -192,7 +200,22 @@
                 computed: {
                     cartItemCount() {
                         return this.cart.length || ''
+                    },
+                    sortedProducts() {
+                        // The comparison function that defines the order
+                        function compare(a, b) { // you can change the price,sorting etc...
+                            if (a.price > b.price) 
+                                return 1; // -1
+                            if (a.price < b.price) 
+                                return -1; // 1
+                            return 0;
+                        }
+                        // sort the 'products' array and return it
+                        return this.products.sort(compare);
                     }
+
+
+
                     // canAddToCart() {
                     //     return this.product.availableInventory > this.cartItemCount;
                     // }

@@ -9,24 +9,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.js">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    
 
     </script>
 </head>
 <body>
-    <div id="app">
+    <div id="app" border:1px solid black>
 
-        <div class="container">
-  <h1>Hello World!</h1>
-  <div class="row">
-    <div class="col-sm-6" style="background-color:yellow;">
-      <p>Lorem ipsum...</p>
-    </div>
-    <div class="col-sm-6" style="background-color:pink;">
-      <p>Sed ut perspiciatis...</p>
-    </div>
-  </div>
-</div>
+
 
         <div>
         <h2 v-text="product.title"></h2>
@@ -34,6 +24,19 @@
         <img v-bind:src="product.image" alt="Math logo">
         <p v-html="product.description"></p>
         <p>{{ product.price }}</p>
+        <p>Available inventory</p>
+        <p>{{product.availableInventory}}</p>
+
+        <button v-on:click="addClass" v-bind:disabled="!canAddClass">
+            Add to cart
+            <!-- v-show is treated as a bad practice :(  -->
+        </button>
+
+        <span class="inventory-message" v-if="product.availableInventory - cartItemCount === 0">All out!</span>
+
+        <span class="inventory-message" v-else-if="product.availableInventory - cartItemCount < 5">Only {{product.availableInventory - cartItemCount}} left!</span>
+
+        <span class="inventory-message" v-else>Buy now!</span>
 
     </div>
 
@@ -42,6 +45,7 @@
     <script type="text/javascript">
       let webstore = new Vue({
         el: '#app', // mounting point selector, ID
+
         data: {
             product: {
                 id: '1001',
@@ -50,9 +54,26 @@
                 description: 'Calculus for beginners',
                 price: '100',
                 image: 'mathlogomedium.png',
-                lessonAvailability: ''
-            }
+                availableInventory: 5
+            },
+            cart: []
+        },
+
+        methods: {
+          addClass() {
+            this.cart.push (this.product.id);
+          }
+        },
+
+        computed: {
+          cartItemCount() {
+            return this.cart.length || ''
+            },
+          canAddClass() {
+            return this.product.availableInventory > this.cartItemCount;
+          }
         }
+
       });
     </script>
 </body>

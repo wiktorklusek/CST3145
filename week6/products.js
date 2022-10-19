@@ -13,7 +13,7 @@ let products = [
       "title": "Yarn",
       "description": "Yarn your cat can play with for a very <strong>long</strong> time!",
       "price": 299,
-      "image": "yarn.jpeg",
+      "image": "yarn_small.jpeg",
       "availableInventory": 7,
       "rating": 1
     },
@@ -22,7 +22,7 @@ let products = [
       "title": "Kitty Litter",
       "description": "Premium kitty litter for your cat.",
       "price": 1100,
-      "image": "cat-litter.jpeg",
+      "image": "cat-litter_small.jpeg",
       "availableInventory": 99,
       "rating": 4
     },
@@ -40,7 +40,7 @@ let products = [
       "title": "Laser Pointer",
       "description": "Drive your cat crazy with this <em>amazing</em> product.",
       "price": 4999,
-      "image": "laser-pointer.jpeg",
+      "image": "1laser-pointer_small.jpeg",
       "availableInventory": 25,
       "rating": 1
     }
