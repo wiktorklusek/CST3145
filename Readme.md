@@ -3,7 +3,7 @@
     - Github page URL: https://githubpage.com
 
     - Group members:
-      - Wiktor - {{ add your student number }} - {{ add your student email }}
+      - Wiktor - M00780216 - {{ add your student email }}
       - Abdul-Rasaq {{ add your student number }} - {{ add your student email }}
       - Tee {{ add your student number }} - {{ add your student email }}
       - Abdul-matin Adebayo - M00869707 - AA5328@LIVE.MDX.AC.UK
