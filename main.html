@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CST3140 Lessons</title>
+
+  <!-- google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <!-- css -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+    crossorigin="anonymous">
+  <!-- vue -->
+  <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
+</head>
+
+<body>
+  <div class="container mt-5" id="app">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-6">
+
+        <div class="border-body px-5 py-4 rounded shadow-sm">
+          <div class="row">
+              <div class="col-8">
+                  <h2 v-text="product.subject">Subject: </h2>
+                  <p><b>Location:</b> {{ product.location }}</p>
+                  <p><b>Description:</b> {{ product.description }}</p>
+                  <p><b>Price:</b> {{ product.price }}</p>
+                  <p><b>Spaces:</b> <span v-if="product.numberOfSpaces - cartItemCount > 0">Only
+                      {{product.numberOfSpaces - cartItemCount}} left!</span>
+                    <span v-else-if="product.numberOfSpaces - cartItemCount === 0">All out!</span>
+                  </p>
+      
+                  <button type="button" v-on:click="addClass" v-bind:disabled="!canAddClass" class="btn btn-dark btn-sm px-4 mt-3">
+                    Add to cart
+                  </button>
+      
+                  <span v-else>Buy now!</span>
+                </div>
+                <div class="col-4">
+                  <img v-bind:src="product.image" alt="Math logo" class="img-fluid mb-3">
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script type="text/javascript">
+    let webstore = new Vue({
+      el: '#app', // mounting point selector, ID
+
+      data: {
+        product: {
+          id: '1001',
+          subject: 'Math',
+          location: 'London',
+          description: 'Calculus for beginners',
+          price: '100',
+          image: 'assets/mathlogomedium.png',
+          numberOfSpaces: 5
+        },
+        cart: []
+      },
+
+      methods: {
+        addClass() {
+          this.cart.push(this.product.id);
+        }
+      },
+
+      computed: {
+        
+        cartItemCount() {
+          return this.cart.length || ''
+        },
+        canAddClass() {
+          return this.product.numberOfSpaces > this.cartItemCount;
+        }
+      }
+
+    });
+  </script>
+</body>
+
+</html>
