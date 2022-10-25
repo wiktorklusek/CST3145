@@ -6,41 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Math lessons</title>
 
+    <link rel="stylesheet" href="style.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.js">
-    
-
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.js"></script>
 </head>
 <body>
-    <div id="app" border:1px solid black>
+  <!-- START div id="app" START -->
+    <div id="app" border:1px solid black style="text-align:center">
 
+        <div id="borderAround" class="borderAround">
 
+            <h2 v-text="product.title"></h2>
+            <h2 v-text="product.location"></h2>
+            <img v-bind:src="product.image" alt="Math logo">
+            <p v-html="product.description"></p>
+            <p>£{{ product.price }}</p>
+            <p>Available inventory</p>
+            <p>{{product.availableInventory - cartItemCount}}</p>
 
-        <div>
-        <h2 v-text="product.title"></h2>
-        <h2 v-text="product.location"></h2>
-        <img v-bind:src="product.image" alt="Math logo">
-        <p v-html="product.description"></p>
-        <p>{{ product.price }}</p>
-        <p>Available inventory</p>
-        <p>{{product.availableInventory}}</p>
+            <button v-on:click="addClass" v-bind:disabled="!canAddClass">
+                Add to cart
+                <!-- v-show is treated as a bad practice :(  -->
+            </button>
 
-        <button v-on:click="addClass" v-bind:disabled="!canAddClass">
-            Add to cart
-            <!-- v-show is treated as a bad practice :(  -->
-        </button>
+            <span class="inventory-message" v-if="product.availableInventory - cartItemCount === 0">All out!</span>
+            <span class="inventory-message" v-else-if="product.availableInventory - cartItemCount < 5">Only {{product.availableInventory - cartItemCount}} left!</span>
+            <span class="inventory-message" v-else>Buy now!</span>
 
-        <span class="inventory-message" v-if="product.availableInventory - cartItemCount === 0">All out!</span>
+        </div>
 
-        <span class="inventory-message" v-else-if="product.availableInventory - cartItemCount < 5">Only {{product.availableInventory - cartItemCount}} left!</span>
-
-        <span class="inventory-message" v-else>Buy now!</span>
-
-    </div>
-
-    </div>
+    </div> 
+    <!-- END div id="app" END -->
 
     <script type="text/javascript">
       let webstore = new Vue({
