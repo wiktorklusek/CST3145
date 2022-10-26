@@ -1,5 +1,6 @@
 ---- <b>CST3145 Group Coursework</b> ----
     <br> <br>
+    - Github URL: https://github.com/wiktorklusek/CST3145
     - Github page URL: https://wiktorklusek.github.io/CST3145/main.html
 
     - Group members:
