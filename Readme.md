@@ -1,11 +1,11 @@
 ---- <b>CST3145 Group Coursework</b> ----
     <br> <br>
-    - Github page URL: https://githubpage.com
+    - Github page URL: https://wiktorklusek.github.io/CST3145/main.html
 
     - Group members:
-      - Wiktor - M00780216 - WK186@LIVE.MDX.AC.UK
-      - Abdul-Rasaq M00755048 - AA4818@live.mdx.ac.uk
-      - Theevahar Srirangan {{ add your student number }} - {{ add your student email }}
+      - Wiktor Klusek - M00780216 - WK186@LIVE.MDX.AC.UK
+      - Abdul-Rasaq Akewusure - M00755048 - AA4818@live.mdx.ac.uk
+      - Theevahar Srirangan - M00675232 - TS853@live.mdx.ac.uk
       - Abdul-matin Adebayo - M00869707 - AA5328@LIVE.MDX.AC.UK
       - Jan Ciepiela - M00779169 - JC1663@live.mdx.ac.uk
 
