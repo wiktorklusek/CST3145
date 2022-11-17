@@ -1,0 +1,107 @@
+filteredClasses(sortValue) {
+          
+          let tempClasses = this.products
+
+          // Sort by alphabetical Order
+          tempClasses = tempClasses.sort((a, b) =>{
+            if (this.sortBy == 'alphabetically') {
+              let fa = a.subject.toLowerCase(), fb = b.subject.toLowerCase()
+
+              if(fa < fb) { return -1 }
+              if(fa > fb) { return 1 }
+              return 0
+              } 
+            else if(this.sortBy == 'subject') {
+              let fa = a.subject.toLowerCase(), fb = b.subject.toLowerCase()
+
+              if(fa < fb) { return -1 }
+              if(fa > fb) { return 1 }
+              return 0
+            }
+            else if(this.sortBy == 'location') {
+              let fa = a.location.toLowerCase(), fb = b.location.toLowerCase()
+
+              if(fa < fb) { return -1 }
+              if(fa > fb) { return 1 }
+              return 0
+            }
+            else if(this.sortBy == 'price') {
+              let fa = a.price, fb = b.price
+
+              if(fa < fb) { return -1 }
+              if(fa > fb) { return 1 }
+              return 0
+            }
+            else if(this.sortBy == 'availability') {
+              let fa = a.availability, fb = b.availability
+
+              if(fa < fb) { return -1 }
+              if(fa > fb) { return 1 }
+              return 0
+            }
+            else {
+              print("YOU HAVE REACHED THE PLACE WHERE DEVIL SAYS GOODNIGHT!")
+            }
+          })
+
+        // Show sorted array in descending or ascending order
+        if (!this.ascending) {
+        	tempClasses.reverse()
+        }
+        return tempClasses
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          onSubmit() {
+          let order = {
+          firstName: this.firstName,
+          lastName: this.lastName,
+          postCode: this.postCode,
+          mailAddress: this.emailAddress,
+          phoneNumber: this.phoneNumber
+          }
+
+                  if(this.firstName && this.lastName && this.postCode && this.emailAddress && this.phoneNumber) {
+                    let order = {
+                      firstName: this.firstName,
+                      lastName: this.lastName,
+                      postCode: this.postCode,
+                      emailAddress: this.emailAddress,
+                      phoneNumber: this.phoneNumber
+                    }
+                    this.firstName = null
+                    this.lastName = null
+                    this.postCode = null
+                    this.emailAddress = null
+                    this.phoneNumber = null
+                  } else {
+                    if(!this.name) {
+                      this.errors.push("Name required!")
+                    }
+                  }
+        },

@@ -1,0 +1,58 @@
+// Created RegEx for name to be at least one character long
+var nameRegExp = new RegExp("^[A-Za-z]{1,}$");
+// Created RegEx for the phone number to start with '07' and have 9 other digits
+var phoneRegExp = new RegExp("^07[0-9]{9,9}$");
+
+
+
+
+
+        sortedProducts() {
+            function compare(a,b) {
+                if (a.price > b.price) return 1;
+                if (a.price < b.price) return -1;
+                return 0;
+            }
+            return this.products.sort(compare);
+        },
+        // Sorts products by price high to low
+        sortedProductsHigh() {
+            function compare(a,b) {
+                if (a.price < b.price) return 1;
+                if (a.price > b.price) return -1;
+                return 0;
+            }
+            return this.products.sort(compare);
+        },
+        // Sorts products alphabetically from A to Z
+        alphabetProducts() {
+            function compare(a,b) {
+                if (a.name > b.name) return 1;
+                if (a.name < b.name) return -1;
+                return 0;
+            }
+            return this.products.sort(compare);
+        },
+        // Sorts products from Z to A
+        alphabetProductsZ() {
+            function compare(a,b) {
+                if (a.name < b.name) return 1;
+                if (a.name > b.name) return -1;
+                return 0;
+            }
+            return this.products.sort(compare);
+        },
+        // Uses a lambda function to check whether the search term inputted is included in
+        // The product name, location, price or spaces.  It is not case sensitive
+        searchField() {
+        
+            return this.products.filter(product => {
+                return (product.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+                        product.location.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+                        // For the data saved as integers, they get cast to String which lets it match any typed numbers 
+                        product.price.toString().includes(this.searchTerm.toLowerCase()) ||
+                        product.spaces.toString().includes(this.searchTerm.toLowerCase()))
+            })
+        }
+    }
+});
