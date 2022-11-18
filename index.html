@@ -207,6 +207,7 @@
                     <br>
                     <!-- This input field is bound to the "lastName" in th 'order' object -->
                     <input v-model.number.trim="order.phoneNumber"/>
+                    <p v-if="!phoneNumberIsValid">The phone number field is required!</p>
                   </p>
 
                   <!-- Working button, but may create a duplicate alerts -->
