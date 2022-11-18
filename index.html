@@ -322,11 +322,6 @@
         },
         showCheckout() {
           this.showProduct = this.showProduct ? false : true;
-          // if(this.showProduct) {
-          //   this.showProduct = false
-          // } else {
-          //   this.showProduct = true
-          // }
         },
         canAddClass(product) {
           return product.numberOfSpaces > this.cartCount(product.id);
@@ -454,59 +449,6 @@
         return tempClasses
   },
 
-
-
-//----------------------------------------------------------------------------------------------------------------------------------------
-// TESTING                                                                                                                               |
-//----------------------------------------------------------------------------------------------------------------------------------------
-
-// Uses a lambda function to check whether the search term inputted is included in
-        // The product name, location, price or spaces.  It is not case sensitive
-
-
-        // searchField() {
-        
-            // return this.products.filter(product => {
-            //     return (product.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-            //             product.location.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-            //             // For the data saved as integers, they get cast to String which lets it match any typed numbers 
-            //             product.price.toString().includes(this.searchTerm.toLowerCase()) ||
-            //             product.spaces.toString().includes(this.searchTerm.toLowerCase()))
-
-            // }
-        //   }
-
-        // searchField() {
-
-        //   return this.products.filter(product => {
-
-        //     // let tempClasses = this.product
-        //     let tempClasses = this.products
-
-        //     // if(this.searchValue != '' && this.searchValue) {
-              
-
-        //       tempClasses = tempClasses.filter((product) => {
-
-        //         if(this.searchValue != '') {
-
-        //             return (
-        //             product.subject.toLowerCase().includes(this.searchValue.toLowerCase())
-        //             ||
-        //             product.location.toLowerCase().includes(this.searchValue.toLowerCase())
-        //             ||
-        //             product.price.toString().includes(this.searchValue.toLowerCase())
-        //             ||
-        //             product.numberOfSpaces.toLowerCase().includes(this.searchValue.toLowerCase())
-        //             )
-        //         }
-        //       })
-            
-        //     return tempClasses;
-        //   }
-        //   )
-        // }
-
         // implement the toLowerCase() so that the search can be used with the both small and capital letters
         filteredClassesBar() {
           return this.products.filter((product) => {
@@ -525,10 +467,6 @@
             return product
           }
         }
-          
-
-        
-
 }
 })
   </script>
