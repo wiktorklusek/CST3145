@@ -452,9 +452,9 @@
         // implement the toLowerCase() so that the search can be used with the both small and capital letters
         filteredClassesBar() {
           return this.products.filter((product) => {
-          return product.subject.match(this.search) || 
-            product.location.match(this.search) || 
-            product.description.match(this.search) // || product.price.match(this.search) || product.numberOfSpaces.match(this.search)
+          return product.subject.toLowerCase().match(this.search.toLowerCase()) || 
+            product.location.toLowerCase().match(this.search.toLowerCase()) || 
+            product.description.toLowerCase().match(this.search.toLowerCase())// Not sure whether this is correct logic to search in search bar for a price? || product.price.match(this.search) || product.numberOfSpaces.match(this.search)
 
            // || product.numberOfSpaces.match(parseInt(this.search))
 
