@@ -1,7 +1,7 @@
 ---- <b>CST3145 Group Coursework</b> ----
     <br> <br>
     - <b>Github URL:</b> https://github.com/wiktorklusek/CST3145 <br>
-    - <b>Github page URL:</b> https://wiktorklusek.github.io/CST3145/main.html
+    - <b>Github page URL:</b> https://wiktorklusek.github.io/CST3145/
 
     - Group members:
       - Wiktor Klusek - M00780216 - WK186@LIVE.MDX.AC.UK
