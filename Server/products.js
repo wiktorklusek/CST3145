@@ -90,3 +90,5 @@
             numberOfSpaces: '2',
           }
         ];
+
+        module.exports = { product }
