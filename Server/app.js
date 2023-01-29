@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-/// gets product data from product
-const productData = require('./product');
+/// gets lessons data from lessons
+const productData = require('./products');
 
 let app = express();
 app.set('json spaces', 3);
@@ -28,8 +28,8 @@ app.get("/user", function(req, res) {
    });
 })
 
-/// {/product} route to get list of product
-app.get("/product", function(req, res) {
+/// {/lessons} route to get list of lessons
+app.get("/products", function(req, res) {
     res.json(productData.product);
 });
 
