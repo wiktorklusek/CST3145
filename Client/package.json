@@ -1,0 +1,19 @@
+{
+  "name": "cw1_individual-work_m00780216",
+  "version": "1.0.0",
+  "description": "---- <b>CST3145 Group Coursework</b> ----     <br> <br>     - <b>Github URL:</b> https://github.com/wiktorklusek/CST3145 <br>     - <b>Github page URL:</b> https://wiktorklusek.github.io/CST3145/",
+  "main": "products.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongodb": "^4.13.0",
+    "mongoose": "^6.9.0",
+    "morgan": "^1.10.0",
+    "properties-reader": "^2.2.0"
+  }
+}
