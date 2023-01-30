@@ -22,3 +22,8 @@
       - https://fonts.googleapis.com
       - https://fonts.gstatic.com
       - https://fonts.googleapis.com/css2?family=Poppins&display=swap
+      
+    - Node modules
+      - express.js
+      - cors.js
+      - ...
