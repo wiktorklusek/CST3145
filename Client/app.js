@@ -33,12 +33,15 @@ let webstore = new Vue({
 
       },
 
+      // This function runs when creating the Vue instance
       created: function(){
-        fetch('http://localhost:3000/collections/products').then(
+            // Replacing the URL to my Heroku app and route
+        fetch('https://cst3145-wk186.herokuapp.com/collections/products').then(
           function (response) {
             response.json().then(
               function(json) {
                 webstore.products = json;
+                    // note that I am using 'webstore.products' instead of 'this.products'
                 console.log(json);
               }
             )
