@@ -12,7 +12,7 @@ let webstore = new Vue({
         searchValue: '',
             
         // Initial API functionality for search
-        searchResults: [];
+        searchResults: [],
 
         // Creating a toggle/button for a different sorting functionality
         currentSort: '',
