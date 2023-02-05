@@ -57,7 +57,7 @@ let webstore = new Vue({
     //Searching functionality implemented in API
     searchAPI() {
       fetch(
-        `https://cst3145-wk186.herokuapp.com/collections/products/search?q={this.search}`
+        `https://cst3145-wk186.herokuapp.com/collections/products/search?q=${this.search}`
       )
         .then((response) => response.json())
         .then((data) => {
