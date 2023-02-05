@@ -12,7 +12,7 @@ let webstore = new Vue({
         searchValue: '',
             
         // Initial API functionality for search
-        searchAPIResults: [],
+        searchResults: [];
 
         // Creating a toggle/button for a different sorting functionality
         currentSort: '',
@@ -55,11 +55,11 @@ let webstore = new Vue({
       methods: {
             
       //Searching functionality implemented in API
-      searchAPI() {
-          fetch(`https://cst3145-wk186.herokuapp.com/collections/products/search?q={this.search}`)
+      search() {
+          fetch(`https://cst3145-wk186.herokuapp.com/collections/products/search?q=%{this.search}`)
                .then(response => response.json())
                .then(data => {
-                  webstore.searchAPIResults = data;
+                  this.searchResults = data;
                       })
                    .catch(error => console.error(error))
         },
