@@ -118,17 +118,16 @@ let webstore = new Vue({
       }
     },
 
-                //Submitting an order, updating the available spaces for the lessons submitted
-                submitCheckoutForm() {
-                    this.computeLessonsForOrder();
-                    const newOrder = {
-                        "name": this.order.firstName,
-                        "numberOfSpaces": this.orderLessonSpaces,
-                        "id": this.lessonsIDs,
-                        "phoneNumber": this.order.phoneNumber
-                      }
-
-                    fetch("https://cst3145-wk186.herokuapp.com/collections/orders", {
+    //Submitting an order, updating the available spaces for the lessons submitted
+    submitCheckoutForm() {
+        this.computeLessonsForOrder();
+        const newOrder = {
+             "name": this.order.firstName,
+             "numberOfSpaces": this.orderLessonSpaces,
+             "id": this.lessonsIDs,
+             "phoneNumber": this.order.phoneNumber
+          }
+            fetch("https://cst3145-wk186.herokuapp.com/collections/orders", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
