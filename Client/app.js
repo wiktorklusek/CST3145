@@ -118,7 +118,7 @@ let webstore = new Vue({
       }
     },
 
-    //Submitting an order, updating the available spaces for the lessons submitted
+    //Submitting an order, updating the available spaces for the products submitted
     submitCheckoutForm() {
         this.computeLessonsForOrder();
         const newOrder = {
@@ -147,8 +147,7 @@ let webstore = new Vue({
 
                     //PUT route for updating the lessons
                     this.cart.forEach(j => {
-                        this.lessons.forEach(i => {
-
+                        this.product.forEach(i => {
                             let count = null;
                             if (j == i.id) {
                                 count = count + 1;
