@@ -1,7 +1,8 @@
 ---- <b>CST3145 Group Coursework</b> ----
     <br> <br>
     - <b>Github URL:</b> https://github.com/wiktorklusek/CST3145 <br>
-    - <b>Github page URL:</b> https://wiktorklusek.github.io/CST3145/Client/index.html
+    - <b>Github page URL:</b> https://wiktorklusek.github.io/CST3145/Client/index.html <br>
+    - <b>Search API example:</b> https://cst3145-wk186.herokuapp.com/collections/products/search?q=Math
 
     - Group members:
       - Wiktor Klusek - M00780216 - WK186@LIVE.MDX.AC.UK
