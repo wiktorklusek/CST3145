@@ -129,7 +129,7 @@ let webstore = new Vue({
       };
 
       fetch(
-        "https://cst3145-wk186.herokuapp.com/collections/orders",
+        `https://cst3145-wk186.herokuapp.com/collections/orders`,
         {
           method: "POST",
           headers: {
