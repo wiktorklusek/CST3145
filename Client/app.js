@@ -11,6 +11,8 @@ let webstore = new Vue({
         search: '',
         searchValue: '',
             
+        newProduct: [],
+            
         // Initial API functionality for search
         searchResults: [],
 
@@ -53,6 +55,33 @@ let webstore = new Vue({
       },
 
       methods: {
+            
+            
+            
+     fetchAPI() {       
+            //set the url to your server and route
+//fetch("http://localhost:3000/collections/products", {
+fetch("https://cst3145-wk186.herokuapp.com/collections/products", {
+method: "POST", //set the HTTP method as "POST"
+headers: {
+"Content-Type": "application/json", //set the data type as JSON
+},
+body: JSON.stringify(newProduct) //need to stringigy the JSON
+}).then(
+function(response) {
+response.json().then(
+function(json) {
+alert("Success: " + json.acknowledged);
+console.log("Success: " + json.acknowledged);
+webstore.products.push(newProduct);
+}
+)})
+     },
+            
+            
+            
+            
+            
             
       //Searching functionality implemented in API
 searchAPI() {
