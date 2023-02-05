@@ -122,10 +122,12 @@ let webstore = new Vue({
     submitCheckoutForm() {
       this.computeLessonsForOrder();
       const newOrder = {
-        "firstName": this.order.firstName,
+        "name": this.order.firstName,
         "numberOfSpaces": this.orderLessonSpaces,
         "id": this.lessonsIDs,
         "phoneNumber": this.order.phoneNumber
+};
+        
       };
 
 fetch(
