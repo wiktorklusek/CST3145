@@ -8,7 +8,7 @@ let webstore = new Vue({
     cart: [],
     ascending: true,
     // sortBy: 'subject',
-    search: "",
+    search: '',
     searchValue: "",
 
     // Initial API functionality for search
@@ -57,7 +57,7 @@ let webstore = new Vue({
     //Searching functionality implemented in API
     searchAPI() {
       fetch(
-        `https://cst3145-wk186.herokuapp.com/collections/products/search?q={webstore.search}`
+        `https://cst3145-wk186.herokuapp.com/collections/products/search?q={this.search}`
       )
         .then((response) => response.json())
         .then((data) => {
