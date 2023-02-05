@@ -120,13 +120,15 @@ let webstore = new Vue({
 
     //Submitting an order, updating the available spaces for the products submitted
     submitCheckoutForm() {
-  this.computeLessonsForOrder();
-  const newOrder = {
-    name: this.order.firstName,
-    numberOfSpaces: this.orderLessonSpaces,
-    id: this.lessonsIDs,
-    phoneNumber: this.order.phoneNumber
-  };
+      
+    this.computeLessonsForOrder();
+      
+    const newOrder = {
+      name: this.order.firstName,
+      numberOfSpaces: this.orderLessonSpaces,
+      id: this.lessonsIDs,
+      phoneNumber: this.order.phoneNumber
+    }
 
   fetch("https://cst3145-wk186.herokuapp.com/collections/orders", {
     method: "POST",
@@ -134,35 +136,40 @@ let webstore = new Vue({
       "Content-Type": "application/json"
     },
     body: JSON.stringify(newOrder)
-  })
-    .then(response => response.json())
-    .then(json => {
-      console.log(`Success: ${json.acknowledged}`);
-    });
+  }).then(
+      function (response) {
+          response.json().then(
+              function (json) {
+                  console.log("Success: " + json.ackowledged);
+              })
+      })
 
-  let count = 0;
+  //PUT route for updating the lessons    
   this.cart.forEach(j => {
     this.product.forEach(i => {
+      let count = 0;
       if (j === i.id) {
         count++;
         const updateProduct = {
           numberOfSpaces: i.numberOfSpaces - count
-        };
+        }
 
         fetch(`https://cst3145-wk186.herokuapp.com/collections/products/${i._id}`, {
           method: "PUT",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(updateProduct)
-        })
-          .then(response => response.json())
-          .then(json => {
-            console.log(`Success: ${json.acknowledged}`);
-          });
-      }
-    });
-  });
+        }).then(
+                  function (response) {
+                      response.json().then(
+                          function (json) {
+                              console.log("Success: " + json.ackowledged);
+                          }
+                      )}
+              )}
+      })
+  })
   alert("Thank you for submitting your order!");
 },
     //Input validation methods
