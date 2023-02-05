@@ -126,7 +126,7 @@ let webstore = new Vue({
         "numberOfSpaces": this.orderLessonSpaces,
         "id": this.lessonsIDs,
         "phoneNumber": this.order.phoneNumber
-      }};
+      }
 
 fetch(
   'https://cst3145-wk186.herokuapp.com/collections/orders',
