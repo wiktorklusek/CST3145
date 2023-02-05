@@ -128,20 +128,24 @@ let webstore = new Vue({
         numberOfSpaces: this.orderLessonSpaces,
       };
 
-      fetch(
-        `https://cst3145-wk186.herokuapp.com/collections/orders`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newOrder),
-        }
-      ).then(function (response) {
-        response.json().then(function (json) {
-          console.log("Success: " + json.ackowledged);
-        });
-      });
+fetch(
+  `https://cst3145-wk186.herokuapp.com/collections/orders`,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newOrder),
+  }
+).then(function (response) {
+  if (response.ok) {
+    response.json().then(function (json) {
+      console.log("Success: " + json.ackowledged);
+    });
+  } else {
+    console.log("Error: " + response.statusText);
+  }
+});
 
       //PUT route for updating the lessons
       this.cart.forEach((j) => {
