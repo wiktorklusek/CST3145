@@ -11,7 +11,21 @@ let webstore = new Vue({
         search: '',
         searchValue: '',
             
-        newProduct: [],
+        newProduct: [
+            "id": 1010,
+            "title": "NewYarn",
+            "description": "Yarn
+            your cat can play
+            with for a very
+            <strong>long</strong
+            > time!",
+            "price": 4.99,
+            "image":
+            "images/yarn.jpg",
+            "availableInventory"
+            : 7,
+            "rating": 5
+        ],
             
         // Initial API functionality for search
         searchResults: [],
