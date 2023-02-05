@@ -118,65 +118,66 @@ let webstore = new Vue({
       }
     },
 
-    //Submitting an order, updating the available spaces for the lessons submitted
-    submitCheckoutForm() {
-      this.computeLessonsForOrder();
-      const newOrder = {
-        "name": this.order.firstName,
-        "numberOfSpaces": this.orderLessonSpaces,
-        "id": this.lessonsIDs,
-        "phoneNumber": this.order.phoneNumber
-      }
+                //Submitting an order, updating the available spaces for the lessons submitted
+                submitCheckoutForm() {
+                    this.computeLessonsForOrder();
+                    const newOrder = {
+                        "name": this.order.firstName,
+                        "numberOfSpaces": this.orderLessonSpaces,
+                        "id": this.lessonsIDs,
+                        "phoneNumber": this.order.phoneNumber
+                      }
 
-fetch(
-  'https://cst3145-wk186.herokuapp.com/collections/orders',
-  {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newOrder),
-  }
-).then(function (response) {
-  if (response.ok) {
-    response.json().then(function (json) {
-      console.log("Success: " + json.ackowledged);
-    });
-  } else {
-    console.log("Error: " + response.statusText);
-  }
-});
+                    fetch("https://cst3145-wk186.herokuapp.com/collections/orders", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(newOrder)
+                    }).then(
+                        function (response) {
+                            response.json().then(
+                                function (json) {
+                                    console.log("Success: " + json.ackowledged);
 
-      //PUT route for updating the lessons
-      this.cart.forEach((j) => {
-        this.products.forEach((i) => {
-          let count = null;
-          if (j == i.id) {
-            count = count + 1;
 
-            const updatePorduct = {
-                numberOfSpaces: i.numberOfSpaces - count,
-            };
+                                }
+                            )
+                        }
+                    )
 
-            fetch(
-              `https://cst3145-wk186.herokuapp.com/collections/products/${i._id}`,
-              {
-                method: "PUT",
-                headers: {
-                  "Content-Type": "application/json",
+                    //PUT route for updating the lessons
+                    this.cart.forEach(j => {
+                        this.lessons.forEach(i => {
+
+                            let count = null;
+                            if (j == i.id) {
+                                count = count + 1;
+
+                                const updateProduct = {
+                                    "numberOfSpaces": i.numberOfSpaces - count
+                                }
+
+                                fetch(`https://cst3145-wk186.herokuapp.com/collections/products/${i._id}`, {
+                                    method: "PUT",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                    },
+                                    body: JSON.stringify(updateProduct)
+                                }).then(
+                                    function (response) {
+                                        response.json().then(
+                                            function (json) {
+                                                console.log("Success: " + json.ackowledged);
+                                            }
+                                        )
+                                    }
+                                )
+                            }
+                        })
+                    })
+                    alert("Thank you for submitting your order!");
                 },
-                body: JSON.stringify(updatePorduct),
-              }
-            ).then(function (response) {
-              response.json().then(function (json) {
-                console.log("Success: " + json.ackowledged);
-              });
-            });
-          }
-        });
-      });
-      alert("Thank you for submitting your order! Goodbye!");
-    },
     //Input validation methods
     validName(firstName) {
       var name_regex = /^[a-zA-Z]+$/;
