@@ -201,7 +201,7 @@
 
                   <!-- product in products -->
 
-                  <form @submit.prevent="submitForm" v-on:click="fetchAPI()" autocomplete="off">
+                  <form @submit.prevent="submitForm" @click="submitCheckoutForm" autocomplete="off">
 
                   <p>
                     <strong>First Name: *</strong>
