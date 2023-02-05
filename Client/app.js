@@ -56,10 +56,10 @@ let webstore = new Vue({
             
       //Searching functionality implemented in API
 searchAPI() {
-  fetch(`https://cst3145-wk186.herokuapp.com/collections/products/search?q=%{this.search}`)
+  fetch(`https://cst3145-wk186.herokuapp.com/collections/products/search?q=%{webstore.search}`)
     .then(response => response.json())
     .then(data => {
-      this.searchResults = data;
+      webstore.searchResults = data;
         console.log(data);
     })
     .catch(error => console.error(error))
