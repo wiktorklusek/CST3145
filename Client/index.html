@@ -95,8 +95,14 @@
 
         <div v-if="search !== ''">
 
-          <div v-for="product in filteredClassesBar" class="border-body px-5 py-4 rounded shadow-sm">
+<!--      Version used before API search functionality implementation      -->
+<!--           <div v-for="product in filteredClassesBar" class="border-body px-5 py-4 rounded shadow-sm"> -->
 
+<!--             searchAPIResults -->
+          <div v-for="product in searchAPIResults" class="border-body px-5 py-4 rounded shadow-sm">
+            
+            
+            
           <!-- v-for loop for displaying all products -->
             <div class="row">
               <div class="col-8">
