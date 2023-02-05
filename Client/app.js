@@ -120,62 +120,51 @@ let webstore = new Vue({
 
     //Submitting an order, updating the available spaces for the products submitted
     submitCheckoutForm() {
-        this.computeLessonsForOrder();
-        const newOrder = {
-             "name": this.order.firstName,
-             "numberOfSpaces": this.orderLessonSpaces,
-             "id": this.lessonsIDs,
-             "phoneNumber": this.order.phoneNumber
-          }
-            fetch("https://cst3145-wk186.herokuapp.com/collections/orders", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(newOrder)
-                    }).then(
-                        function (response) {
-                            response.json().then(
-                                function (json) {
-                                    console.log("Success: " + json.ackowledged);
+  this.computeLessonsForOrder();
+  const newOrder = {
+    name: this.order.firstName,
+    numberOfSpaces: this.orderLessonSpaces,
+    id: this.lessonsIDs,
+    phoneNumber: this.order.phoneNumber
+  };
 
+  fetch("https://cst3145-wk186.herokuapp.com/collections/orders", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(newOrder)
+  })
+    .then(response => response.json())
+    .then(json => {
+      console.log(`Success: ${json.acknowledged}`);
+    });
 
-                                }
-                            )
-                        }
-                    )
+  let count = 0;
+  this.cart.forEach(j => {
+    this.product.forEach(i => {
+      if (j === i.id) {
+        count++;
+        const updateProduct = {
+          numberOfSpaces: i.numberOfSpaces - count
+        };
 
-                    //PUT route for updating the lessons
-                    this.cart.forEach(j => {
-                        this.product.forEach(i => {
-                            let count = null;
-                            if (j == i.id) {
-                                count = count + 1;
-
-                                const updateProduct = {
-                                    "numberOfSpaces": i.numberOfSpaces - count
-                                }
-
-                                fetch(`https://cst3145-wk186.herokuapp.com/collections/products/${i._id}`, {
-                                    method: "PUT",
-                                    headers: {
-                                        "Content-Type": "application/json",
-                                    },
-                                    body: JSON.stringify(updateProduct)
-                                }).then(
-                                    function (response) {
-                                        response.json().then(
-                                            function (json) {
-                                                console.log("Success: " + json.ackowledged);
-                                            }
-                                        )
-                                    }
-                                )
-                            }
-                        })
-                    })
-                    alert("Thank you for submitting your order!");
-                },
+        fetch(`https://cst3145-wk186.herokuapp.com/collections/products/${i._id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(updateProduct)
+        })
+          .then(response => response.json())
+          .then(json => {
+            console.log(`Success: ${json.acknowledged}`);
+          });
+      }
+    });
+  });
+  alert("Thank you for submitting your order!");
+},
     //Input validation methods
     validName(firstName) {
       var name_regex = /^[a-zA-Z]+$/;
