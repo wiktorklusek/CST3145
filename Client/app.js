@@ -59,7 +59,7 @@ let webstore = new Vue({
           fetch(`https://cst3145-wk186.herokuapp.com/collections/products/search?q={this.search}`)
                .then(response => response.json())
                .then(data => {
-                  this.searchAPIResults = data;
+                  webstore.searchAPIResults = data;
                       })
                    .catch(error => console.error(error))
         },
