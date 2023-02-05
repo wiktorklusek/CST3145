@@ -120,51 +120,59 @@ let webstore = new Vue({
 
     //Submitting an order, updating the available spaces for the lessons submitted
     submitCheckoutForm() {
-const order = {
-name: this.order.name,
-phoneNumber: this.order.phone_number,
-lessonId: this.computeLessonsForOrder(),
-numberOfSpaces: this.orderLessonSpaces
-};
+      this.computeLessonsForOrder();
+      const newOrder = {
+        name: this.order.name,
+        phoneNumber: this.order.phone_number,
+        lessonId: this.lessonsIdsOrder,
+        numberOfSpaces: this.orderLessonSpaces,
+      };
 
-this.postData('https://cst3145-wk186.herokuapp.com/collections/orders', order)
-.then(data => console.log(Success: ${data.acknowledged}))
-.catch(error => console.error(error));
+      fetch(
+        "https://cst3145-wk186.herokuapp.com/collections/orders",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newOrder),
+        }
+      ).then(function (response) {
+        response.json().then(function (json) {
+          console.log("Success: " + json.ackowledged);
+        });
+      });
 
-this.cart.forEach(id => {
-const product = this.products.find(product => product.id === id);
-if (product) {
-const updatedProduct = { numberOfSpaces: product.numberOfSpaces - 1 };
-this.putData("https://cst3145-wk186.herokuapp.com/collections/products/${product._id}", updatedProduct)
-.then(data => console.log(Success: ${data.acknowledged}))
-.catch(error => console.error(error));
-}
-});
+      //PUT route for updating the lessons
+      this.cart.forEach((j) => {
+        this.products.forEach((i) => {
+          let count = null;
+          if (j == i.id) {
+            count = count + 1;
 
-alert("Thank you for submitting your order! Goodbye!");
-}
+            const updatePorduct = {
+                numberOfSpaces: i.numberOfSpaces - count,
+            };
 
-async postData(url, data) {
-const response = await fetch(url, {
-method: 'POST',
-headers: {
-'Content-Type': 'application/json'
-},
-body: JSON.stringify(data)
-});
-return response.json();
-}
-
-async putData(url, data) {
-const response = await fetch(url, {
-method: 'PUT',
-headers: {
-'Content-Type': 'application/json'
-},
-body: JSON.stringify(data)
-});
-return response.json();
-},
+            fetch(
+              "https://cst3145-wk186.herokuapp.com/collections/products/${i._id}",
+              {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(updatePorduct),
+              }
+            ).then(function (response) {
+              response.json().then(function (json) {
+                console.log("Success: " + json.ackowledged);
+              });
+            });
+          }
+        });
+      });
+      alert("Thank you for submitting your order! Goodbye!");
+    },
     //Input validation methods
     validName(firstName) {
       var name_regex = /^[a-zA-Z]+$/;
