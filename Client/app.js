@@ -55,14 +55,15 @@ let webstore = new Vue({
       methods: {
             
       //Searching functionality implemented in API
-      search() {
-          fetch(`https://cst3145-wk186.herokuapp.com/collections/products/search?q=%{this.search}`)
-               .then(response => response.json())
-               .then(data => {
-                  this.searchResults = data;
-                      })
-                   .catch(error => console.error(error))
-        },
+search() {
+  fetch(`https://cst3145-wk186.herokuapp.com/collections/products/search?q=%{this.search}`)
+    .then(response => response.json())
+    .then(data => {
+      this.searchResults = data;
+        console.log(data);
+    })
+    .catch(error => console.error(error))
+},
 
         addClass(product) {
           this.cart.push(product.id);
