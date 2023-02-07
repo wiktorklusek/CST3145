@@ -120,57 +120,98 @@ let webstore = new Vue({
     //Submitting an order, updating the available spaces for the products submitted
     submitCheckoutForm() {
       
-    this.computeLessonsForOrder();
-      
-    const newOrder = {
-      name: this.order.firstName,
-      numberOfSpaces: this.orderLessonSpaces,
-      id: this.lessonsIDs,
-      phoneNumber: this.order.phoneNumber
-    }
-
-  fetch("https://cst3145-wk186.herokuapp.com/collections/orders", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(newOrder)
-  }).then(
-      function (response) {
-          response.json().then(
-              function (json) {
-                  console.log("Success: " + json.ackowledged);
-              })
-      })
-
-  //PUT route for updating the lessons    
-  this.cart.forEach(j => {
-    this.product.forEach(i => {
-      let count = 0;
-      if (j === i.id) {
-        count++;
-        const updateProduct = {
-          numberOfSpaces: i.numberOfSpaces - count
+      this.cart.forEach((i) => {
+				const newOrder = {
+							name: this.order.firstName,
+							numberOfSpaces: this.orderLessonSpaces,
+							id: this.lessonsIDs,
+							phoneNumber: this.order.phoneNumber
+			};
+			this.postOrder(newOrder);
+				
+			// update available lesson space with put
+      var formattedLesson = { numberOfSpaces: i.numberOfSpaces }
+			// ...
+			
+			});
+			this.cart = [];
+      this.togglePage();
+			),
+      // dialog confirmation
+      showConfirmationDialog() {
+          alert('Order has been submitted successfully')
         }
+    },
+												
+												
+			/// A fetch that saves a new order with POST
+      postOrder(jsonData) {
+            fetch(`https://cst3145-wk186.herokuapp.com/collections/orders`, {
+                method: "POST",
+                body: JSON.stringify(jsonData),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(response => response.json())
+                .then(responseData => {
+                    console.log(responseData);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+      
+//     this.computeLessonsForOrder();
+      
+//     const newOrder = {
+//       name: this.order.firstName,
+//       numberOfSpaces: this.orderLessonSpaces,
+//       id: this.lessonsIDs,
+//       phoneNumber: this.order.phoneNumber
+//     }
 
-        fetch(`https://cst3145-wk186.herokuapp.com/collections/products/${i._id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updateProduct)
-        }).then(
-                  function (response) {
-                      response.json().then(
-                          function (json) {
-                              console.log("Success: " + json.ackowledged);
-                          }
-                      )}
-              )}
-      })
-  })
-  alert("Thank you for submitting your order!");
-},
+//   fetch("https://cst3145-wk186.herokuapp.com/collections/orders", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json"
+//     },
+//     body: JSON.stringify(newOrder)
+//   }).then(
+//       function (response) {
+//           response.json().then(
+//               function (json) {
+//                   console.log("Success: " + json.ackowledged);
+//               })
+//       })
+
+//   //PUT route for updating the lessons    
+//   this.cart.forEach(j => {
+//     this.product.forEach(i => {
+//       let count = 0;
+//       if (j === i.id) {
+//         count++;
+//         const updateProduct = {
+//           numberOfSpaces: i.numberOfSpaces - count
+//         }
+
+//         fetch(`https://cst3145-wk186.herokuapp.com/collections/products/${i._id}`, {
+//           method: "PUT",
+//           headers: {
+//             "Content-Type": "application/json",
+//           },
+//           body: JSON.stringify(updateProduct)
+//         }).then(
+//                   function (response) {
+//                       response.json().then(
+//                           function (json) {
+//                               console.log("Success: " + json.ackowledged);
+//                           }
+//                       )}
+//               )}
+//       })
+//   })
+//   alert("Thank you for submitting your order!");
+//},
     //Input validation methods
     validName(firstName) {
       var name_regex = /^[a-zA-Z]+$/;
@@ -210,14 +251,14 @@ let webstore = new Vue({
       this.sortBy = s;
     },
 
-    //Computing lessons information for submitting an order
-    computeLessonsForOrder() {
-      this.cart.forEach((i) => {
-        this.lessonsIDs.push(i);
-        this.orderLessonSpaces = this.orderLessonSpaces + 1;
-      });
-    },
-  },
+//     //Computing lessons information for submitting an order
+//     computeLessonsForOrder() {
+//       this.cart.forEach((i) => {
+//         this.lessonsIDs.push(i);
+//         this.orderLessonSpaces = this.orderLessonSpaces + 1;
+//       });
+//     },
+//   },
 
   computed: {
     totalItemsInTheCart: function () {
@@ -241,6 +282,12 @@ let webstore = new Vue({
 
     formIsValid() {
       return this.firstNameIsValid && this.phoneNumberIsValid;
+    },
+			
+		// Retrieve Corresponding Item ID from a Basket - EXPERIMENT FUNCTION !!!
+    retrieveCartItem(id) {
+       var item = this.cart.find(x => x.id == id);
+       return item;
     },
 
     //----------------------------------------------------------------------------------------------------------------------------------------
