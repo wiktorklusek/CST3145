@@ -56,16 +56,16 @@ let webstore = new Vue({
   methods: {
     //Searching functionality implemented in API
     searchAPI() {
-      fetch(
-        `https://cst3145-wk186.herokuapp.com/collections/products/search?q=${this.search}`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          this.searchResults = data;
-          console.log(data);
-        })
-        .catch((error) => console.error(error));
-    },
+      fetch(`https://cst3145-wk186.herokuapp.com/collections/products/search?q=${this.search}`).then
+                function (response) {
+                    response.json().then(
+                        function (json) {
+                            // pushing lessons in json format into the lessons array
+                            webstore.products = json;
+                        }
+                    )
+                });
+        },
 
     addClass(product) {
       this.cart.push(product.id);
