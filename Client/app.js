@@ -118,30 +118,29 @@ let webstore = new Vue({
     },
 
     //Submitting an order, updating the available spaces for the products submitted
-    submitCheckoutForm() {
+submitCheckoutForm() {
       
-      this.cart.forEach((i) => {
-				const newOrder = {
-							name: this.order.firstName,
-							numberOfSpaces: this.orderLessonSpaces,
-							id: this.lessonsIDs,
-							phoneNumber: this.order.phoneNumber
-			};
-			this.postOrder(newOrder);
-				
-			// update available lesson space with put
-      var formattedLesson = { numberOfSpaces: i.numberOfSpaces }
-			// ...
-			
-			});
-			this.cart = [];
-      this.togglePage();
-			),
-      // dialog confirmation
-      showConfirmationDialog() {
-          alert('Order has been submitted successfully')
-        }
-    },
+    this.cart.forEach((i) => {
+              const newOrder = {
+                          name: this.order.firstName,
+                          numberOfSpaces: this.orderLessonSpaces,
+                          id: this.lessonsIDs,
+                          phoneNumber: this.order.phoneNumber
+          };
+          this.postOrder(newOrder);
+              
+          // update available lesson space with put
+    var formattedLesson = { numberOfSpaces: i.numberOfSpaces }
+          // ...
+          
+          });
+          this.cart = [];
+    this.togglePage();
+    // dialog confirmation
+    showConfirmationDialog() {
+        alert('Order has been submitted successfully')
+      }
+  },
 												
 												
 			/// A fetch that saves a new order with POST
