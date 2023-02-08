@@ -156,8 +156,9 @@ let webstore = new Vue({
         this.postOrder(newOrder);
 
         // update available lesson space with put
-        var formattedLesson = { numberOfSpaces: i.numberOfSpaces };
+        // var formattedLesson = { numberOfSpaces: i.numberOfSpaces };
         // ...
+      
       //}
      //);
     },
