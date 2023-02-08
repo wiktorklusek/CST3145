@@ -146,8 +146,8 @@ let webstore = new Vue({
         // console.log("newOrder.lessonsIDs: " + newOrder.lessonsIDs);
         console.log("newOrder.phoneNumber: " + newOrder.phoneNumber);
         
-        xyz = this.cart.filter(x => x === newOrder.id[x]).length;
-        console.log("Some calculations: " + xyz);
+        // xyz = this.cart.filter(x => x === newOrder.id[x]).length;
+        // console.log("Some calculations: " + xyz);
         
         
         
