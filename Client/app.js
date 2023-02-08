@@ -138,7 +138,11 @@ let webstore = new Vue({
         };
         
         // Testing
-        console.log("newOrder: " + newOrder);
+        console.log("newOrder.name: " + newOrder.name);
+        console.log("newOrder.numberOfSpaces: " + newOrder.numberOfSpaces);
+        console.log("newOrder.id: " + newOrder.id);
+        console.log("newOrder.phoneNumber: " + newOrder.phoneNumber);
+        
           
         this.postOrder(newOrder);
 
