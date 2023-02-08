@@ -128,7 +128,7 @@ let webstore = new Vue({
       //this.cart.forEach((i) => {
         
         // Testing
-        console.log("i variable from submitCheckoutForm(): " + i);
+        // console.log("i variable from submitCheckoutForm(): " + i);
         
         const newOrder = {
           name: this.order.firstName,
