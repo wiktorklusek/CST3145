@@ -133,7 +133,8 @@ let webstore = new Vue({
         const newOrder = {
           name: this.order.firstName,
           numberOfSpaces: this.orderLessonSpaces,
-          id: this.lessonsIDs,
+          // id: this.lessonsIDs,
+          id: this.cart,
           phoneNumber: this.order.phoneNumber,
         };
         
@@ -142,6 +143,7 @@ let webstore = new Vue({
         console.log("newOrder.numberOfSpaces: " + newOrder.numberOfSpaces);
         console.log("newOrder.orderLessonSpaces: " + newOrder.orderLessonSpaces);
         console.log("newOrder.id: " + newOrder.id);
+        
         console.log("newOrder.lessonsIDs: " + newOrder.lessonsIDs);
         console.log("newOrder.phoneNumber: " + newOrder.phoneNumber);
         
