@@ -125,7 +125,7 @@ let webstore = new Vue({
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Submitting an order, updating the available spaces for the products submitted
     submitCheckoutForm() {
-      this.cart.forEach((i) => {
+      //this.cart.forEach((i) => {
         
         // Testing
         console.log("i variable from submitCheckoutForm(): " + i);
@@ -158,7 +158,8 @@ let webstore = new Vue({
         // update available lesson space with put
         var formattedLesson = { numberOfSpaces: i.numberOfSpaces };
         // ...
-      });
+      //}
+     );
     },
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// A fetch that saves a new order with POST
