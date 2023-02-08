@@ -132,7 +132,7 @@ let webstore = new Vue({
         
         const newOrder = {
           name: this.order.firstName,
-          numberOfSpaces: this.orderLessonSpaces,
+          numberOfSpaces: this.cart.length,
           // id: this.lessonsIDs,
           id: this.cart, // cart is being used and it does return products in a way that they were added
           phoneNumber: this.order.phoneNumber,
@@ -146,8 +146,10 @@ let webstore = new Vue({
         // console.log("newOrder.lessonsIDs: " + newOrder.lessonsIDs);
         console.log("newOrder.phoneNumber: " + newOrder.phoneNumber);
         
-        xyz = this.cart.filter(x => x === 1001).length;
+        xyz = this.cart.filter(x => x === newOrder.id[x]).length;
         console.log("Some calculations: " + xyz);
+        
+        
         
         
           
