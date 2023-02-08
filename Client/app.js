@@ -140,7 +140,9 @@ let webstore = new Vue({
         // Testing
         console.log("newOrder.name: " + newOrder.name);
         console.log("newOrder.numberOfSpaces: " + newOrder.numberOfSpaces);
+        console.log("newOrder.orderLessonSpaces: " + newOrder.orderLessonSpaces);
         console.log("newOrder.id: " + newOrder.id);
+        console.log("newOrder.lessonsIDs: " + newOrder.lessonsIDs);
         console.log("newOrder.phoneNumber: " + newOrder.phoneNumber);
         
           
