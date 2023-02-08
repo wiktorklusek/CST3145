@@ -134,18 +134,21 @@ let webstore = new Vue({
           name: this.order.firstName,
           numberOfSpaces: this.orderLessonSpaces,
           // id: this.lessonsIDs,
-          id: this.cart,
+          id: this.cart, // cart is being used and it does return products in a way that they were added
           phoneNumber: this.order.phoneNumber,
         };
         
         // Testing
         console.log("newOrder.name: " + newOrder.name);
         console.log("newOrder.numberOfSpaces: " + newOrder.numberOfSpaces);
-        console.log("newOrder.orderLessonSpaces: " + newOrder.orderLessonSpaces);
+        // console.log("newOrder.orderLessonSpaces: " + newOrder.orderLessonSpaces);
         console.log("newOrder.id: " + newOrder.id);
-        
-        console.log("newOrder.lessonsIDs: " + newOrder.lessonsIDs);
+        // console.log("newOrder.lessonsIDs: " + newOrder.lessonsIDs);
         console.log("newOrder.phoneNumber: " + newOrder.phoneNumber);
+        
+        xyz = this.cart.filter(x => x === 1001).length;
+        console.log("Some calculations: " + xyz);
+        
         
           
         this.postOrder(newOrder);
