@@ -126,12 +126,20 @@ let webstore = new Vue({
     //Submitting an order, updating the available spaces for the products submitted
     submitCheckoutForm() {
       this.cart.forEach((i) => {
+        
+        // Testing
+        console.log("i variable from submitCheckoutForm(): " + i);
+        
         const newOrder = {
           name: this.order.firstName,
           numberOfSpaces: this.orderLessonSpaces,
           id: this.lessonsIDs,
           phoneNumber: this.order.phoneNumber,
         };
+        
+        // Testing
+        console.log("newOrder: " + newOrder);
+          
         this.postOrder(newOrder);
 
         // update available lesson space with put
