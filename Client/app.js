@@ -157,9 +157,19 @@ let webstore = new Vue({
           
         this.postOrder(newOrder);
 
-        // update available lesson space with put
-        // var formattedLesson = { numberOfSpaces: i.numberOfSpaces };
-        // ...
+    //update the available spaces for each product in the cart
+    this.cart.forEach((product) => {
+      // get the current product from the database
+      this.getProduct(product.id).then((currentProduct) => {
+        // decrement the number of spaces by the quantity of the product in the cart
+        const updatedProduct = { 
+          ...currentProduct, 
+          numberOfSpaces: currentProduct.numberOfSpaces - product.quantity 
+        };
+        // update the product in the database
+        this.putProduct(updatedProduct);
+      });
+    }
       
       //}
      //);
