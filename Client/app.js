@@ -61,8 +61,10 @@ let webstore = new Vue({
       )
         .then((response) => response.json())
         .then((data) => {
+          webstore.products = [];
           this.searchResults = data;
-          webstore.products = json;
+          // webstore.products = json;
+          webstore.products = data;
           console.log(data);
         })
         .catch((error) => console.error(error));
