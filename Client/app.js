@@ -184,7 +184,13 @@ updateNumberOfLessons(id) {
       "Content-Type": "application/json",
     },
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (response.headers.get("Content-Type").includes("application/json")) {
+        return response.json();
+      } else {
+        throw new Error("Response is not JSON");
+      }
+    })
     .then((responseData) => {
       console.log("Response data:", responseData);
       if (responseData.msg === "success") {
@@ -197,6 +203,7 @@ updateNumberOfLessons(id) {
       console.error(error);
     });
 },
+
 
     
     // Validation for the number of lessons being posted to the database
