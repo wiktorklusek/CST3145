@@ -176,27 +176,28 @@ let webstore = new Vue({
       //);
     },
 
-    updateNumberOfLessons(id) {
-      fetch(`https://cst3145-wk186.herokuapp.com/collections/products/${id}`, {
-        method: "PUT",
-        body: JSON.stringify({ numberOfSpaces: this.numberOfSpaces - 1 }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => response.json())
-        .then((responseData) => {
-          console.log("Response data:", responseData);
-          if (responseData.msg === "success") {
-            console.log("Number of lessons updated successfully");
-          } else {
-            console.error("Failed to update the number of lessons");
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+updateNumberOfLessons(id) {
+  fetch(`https://cst3145-wk186.herokuapp.com/collections/products/${id}`, {
+    method: "PUT",
+    body: JSON.stringify({ numberOfSpaces: this.numberOfSpaces - 1 }),
+    headers: {
+      "Content-Type": "application/json",
     },
+  })
+    .then((response) => response.json())
+    .then((responseData) => {
+      console.log("Response data:", responseData);
+      if (responseData.msg === "success") {
+        console.log("Number of lessons updated successfully");
+      } else {
+        console.error("Failed to update the number of lessons");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+},
+
     
     // Validation for the number of lessons being posted to the database
     validLessons(lessons) {
