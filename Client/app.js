@@ -128,38 +128,61 @@ let webstore = new Vue({
     //Submitting an order, updating the available spaces for the products submitted
     submitCheckoutForm() {
       //this.cart.forEach((i) => {
-        
-        // Testing
-        // console.log("i variable from submitCheckoutForm(): " + i);
-        
-        const newOrder = {
-          name: this.order.firstName,
-          numberOfSpaces: this.cart.length,
-          // id: this.lessonsIDs,
-          id: this.cart, // cart is being used and it does return products in a way that they were added
-          phoneNumber: this.order.phoneNumber,
-        };
-        
-        // Testing
-        console.log("newOrder.name: " + newOrder.name);
-        console.log("newOrder.numberOfSpaces: " + newOrder.numberOfSpaces);
-        // console.log("newOrder.orderLessonSpaces: " + newOrder.orderLessonSpaces);
-        console.log("newOrder.id: " + newOrder.id);
-        // console.log("newOrder.lessonsIDs: " + newOrder.lessonsIDs);
-        console.log("newOrder.phoneNumber: " + newOrder.phoneNumber);
-        
-        // xyz = this.cart.filter(x => x === newOrder.id[x]).length;
-        // console.log("Some calculations: " + xyz);
-        
-        
-        
-        
-          
-        this.postOrder(newOrder);
-      
+
+      // Testing
+      // console.log("i variable from submitCheckoutForm(): " + i);
+
+      const newOrder = {
+        name: this.order.firstName,
+        numberOfSpaces: this.cart.length,
+        // id: this.lessonsIDs,
+        id: this.cart, // cart is being used and it does return products in a way that they were added
+        phoneNumber: this.order.phoneNumber,
+      };
+
+      // Testing
+      console.log("newOrder.name: " + newOrder.name);
+      console.log("newOrder.numberOfSpaces: " + newOrder.numberOfSpaces);
+      // console.log("newOrder.orderLessonSpaces: " + newOrder.orderLessonSpaces);
+      console.log("newOrder.id: " + newOrder.id);
+      // console.log("newOrder.lessonsIDs: " + newOrder.lessonsIDs);
+      console.log("newOrder.phoneNumber: " + newOrder.phoneNumber);
+
+      // xyz = this.cart.filter(x => x === newOrder.id[x]).length;
+      // console.log("Some calculations: " + xyz);
+
+      this.postOrder(newOrder);
+
+      //this.cart
+
+      this.updateNumberOfLessons(newOrder);
+
       //}
-     //);
+      //);
     },
+
+    updateNumberOfLessons() {
+      fetch(`https://cst3145-wk186.herokuapp.com/collections/products/`, {
+        method: "PUT",
+        body: JSON.stringify({ numberOfSpaces: this.numberOfSpaces }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((responseData) => {
+          console.log("Response data:", responseData);
+          if (responseData.msg === "success") {
+            console.log("Number of lessons updated successfully");
+          } else {
+            console.error("Failed to update the number of lessons");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// A fetch that saves a new order with POST
     postOrder(jsonData) {
@@ -172,7 +195,7 @@ let webstore = new Vue({
       })
         .then((response) => response.json())
         .then((responseData) => {
-          console.log(responseData);
+          console.log("Response data " + responseData);
         })
         .catch((error) => {
           console.log(error);
