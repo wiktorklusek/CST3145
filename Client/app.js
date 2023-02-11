@@ -151,6 +151,13 @@ let webstore = new Vue({
       // xyz = this.cart.filter(x => x === newOrder.id[x]).length;
       // console.log("Some calculations: " + xyz);
 
+      if (!this.validLessons(newOrder.numberOfSpaces)) {
+          console.log("Error: Number of lessons must be greater than 0");
+          return;
+       }
+
+      // This part below shouldn't be evaluated...
+      
       this.postOrder(newOrder);
 
       //this.cart
@@ -188,6 +195,12 @@ let webstore = new Vue({
           console.error(error);
         });
     },
+    
+    // Validation for the number of lessons being posted to the database
+    validLessons(lessons) {
+        return lessons > 0;
+    },
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// A fetch that saves a new order with POST
