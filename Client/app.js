@@ -161,8 +161,10 @@ let webstore = new Vue({
       this.postOrder(newOrder);
 
       //this.cart
+      
+      // console.log("Length of the order: " + newOrder.length);
 
-      for (let i = 0; i < newOrder.length; i++) {
+      for (let i = 0; i < this.cart.length; i++) {
         this.updateNumberOfLessons(newOrder.id[i]);
         console.log("1) newOrder.id[i]: " + newOrder.id[i]);
         console.log("2) newOrder.id: " + newOrder.id);
