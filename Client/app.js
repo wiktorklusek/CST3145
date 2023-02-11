@@ -212,10 +212,13 @@ let webstore = new Vue({
     validName(firstName) {
         return /^[a-zA-Z]+$/.test(firstName);
     },
-
+  
+    // Validation updated for the UK phone numbers
     validNumber(phoneNumber) {
-        return /^\d{10}$/.test(phoneNumber);
+        var phone_regex = /^\(?([0-9]{11})$/;
+        return phone_regex.test(phoneNumber);
     },
+
 
     //Cart count method
     cartCount(id) {
