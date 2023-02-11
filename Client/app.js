@@ -208,15 +208,13 @@ let webstore = new Vue({
         });
     },
 
-    //Input validation methods
+    //Input validation methods - improved
     validName(firstName) {
-      var name_regex = /^[a-zA-Z]+$/;
-      return name_regex.test(firstName);
+        return /^[a-zA-Z]+$/.test(firstName);
     },
 
     validNumber(phoneNumber) {
-      var phone_regex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-      return phone_regex.test(phoneNumber);
+        return /^\d{10}$/.test(phoneNumber);
     },
 
     //Cart count method
