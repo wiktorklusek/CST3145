@@ -155,16 +155,20 @@ let webstore = new Vue({
 
       //this.cart
 
-      this.updateNumberOfLessons(newOrder);
+      for (let i = 0; i < newOrder.length; i++) {
+        this.updateNumberOfLessons(newOrder.id[i]);
+      }
+
+      // this.updateNumberOfLessons();
 
       //}
       //);
     },
 
-    updateNumberOfLessons() {
-      fetch(`https://cst3145-wk186.herokuapp.com/collections/products/`, {
+    updateNumberOfLessons(id) {
+      fetch(`https://cst3145-wk186.herokuapp.com/collections/products/${id}`, {
         method: "PUT",
-        body: JSON.stringify({ numberOfSpaces: this.numberOfSpaces }),
+        body: JSON.stringify({ numberOfSpaces: this.numberOfSpaces - 1 }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -186,7 +190,7 @@ let webstore = new Vue({
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// A fetch that saves a new order with POST
     postOrder(jsonData) {
-      fetch(`https://cst3145-wk186.herokuapp.com/collections/orders`, {
+      fetch(`https://cst3145-wk186.herokuapp.com/collections/orders/`, {
         method: "POST",
         body: JSON.stringify(jsonData),
         headers: {
