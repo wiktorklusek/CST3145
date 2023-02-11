@@ -157,6 +157,8 @@ let webstore = new Vue({
 
       for (let i = 0; i < newOrder.length; i++) {
         this.updateNumberOfLessons(newOrder.id[i]);
+        console.log("1) newOrder.id[i]: " + newOrder.id[i]);
+        console.log("2) newOrder.id: " + newOrder.id);
       }
 
       // this.updateNumberOfLessons();
