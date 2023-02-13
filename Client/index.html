@@ -204,29 +204,21 @@
                   <!--         <form @submit.prevent="submitForm" @click="submitCheckoutForm" autocomplete="off">           -->
                   
                   <form @submit.prevent="submitCheckoutForm" @submit.prevent="submitForm" autocomplete="off">
+                    <p>
+                      <strong>First Name: *</strong>
+                      <br>
+                      <input v-model.trim="order.firstName" id="firstName"/>
+                      <p v-if="!validName(order.firstName)">The name field is required!</p>
+                    </p>
 
-                  <p>
-                    <strong>First Name: *</strong>
-                    <br>
-                    <!-- This input field is bound to the "firstName" in th 'order' object -->
-                    <input v-model.trim="order.firstName" id="firstName"/>
-                    <p v-if="!firstNameIsValid">The name field is required!</p>
-                  </p>
+                    <p>
+                      <strong>Phone Number: *</strong>
+                      <br>
+                      <input v-model.number.trim="order.phoneNumber" id="phoneNumber"/>
+                      <p v-if="!validNumber(order.phoneNumber)">The phone number field is required!</p>
+                    </p>
 
-                   <p>
-                    <strong>Phone Number: *</strong>
-                    <br>
-                    <!-- This input field is bound to the "lastName" in th 'order' object -->
-                    <input v-model.number.trim="order.phoneNumber"/>
-                    <p v-if="!phoneNumberIsValid">The phone number field is required!</p>
-                  </p>
-
-                  <!-- Working button, but may create a duplicate alerts -->
-                  <!-- <button v-on:click="submitForm" class="btn btn-dark">Place order</button> -->
-                  <button :disabled="!formIsValid" class="btn btn-dark">Place order</button>
-
-                  <br>
-
+                    <button :disabled="!checkFormValidity()" @click="submitForm" class="btn btn-dark">Place order</button>
                   </form>
 
                   <br>
@@ -287,7 +279,7 @@
 
 
       <!-- scripts -->
-      <script src="app.js"></script>
+      <script src="app.js" type="text/javascript"></script>
 
   <!-- <footer>
     <p>2022</p>
