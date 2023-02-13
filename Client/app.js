@@ -96,7 +96,7 @@ let webstore = new Vue({
     submitForm() {
       // const formIsValid = this.firstNameIsValid // && this.lastNameIsValid ...etc
 
-      if (this.formIsValid) {
+      if (this.checkFormValidity) {
         alert("Order submitted!");
         // console.log('Form submitted', this.order)
       } else {
@@ -124,93 +124,96 @@ let webstore = new Vue({
         return product.name;
       }
     },
+
+    checkFormValidity: function () {
+      return (
+        this.validName(this.order.firstName) &&
+        this.validNumber(this.order.phoneNumber)
+      );
+    },
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Submitting an order, updating the available spaces for the products submitted
     submitCheckoutForm() {
-      //this.cart.forEach((i) => {
-
-      // Testing
-      // console.log("i variable from submitCheckoutForm(): " + i);
-
       const newOrder = {
         name: this.order.firstName,
         numberOfSpaces: this.cart.length,
-        // id: this.lessonsIDs,
-        id: this.cart, // cart is being used and it does return products in a way that they were added
+        id: this.cart,
         phoneNumber: this.order.phoneNumber,
       };
 
-      // Testing
       console.log("newOrder.name: " + newOrder.name);
       console.log("newOrder.numberOfSpaces: " + newOrder.numberOfSpaces);
-      // console.log("newOrder.orderLessonSpaces: " + newOrder.orderLessonSpaces);
       console.log("newOrder.id: " + newOrder.id);
-      // console.log("newOrder.lessonsIDs: " + newOrder.lessonsIDs);
       console.log("newOrder.phoneNumber: " + newOrder.phoneNumber);
 
-      // xyz = this.cart.filter(x => x === newOrder.id[x]).length;
-      // console.log("Some calculations: " + xyz);
-
       if (!this.validLessons(newOrder.numberOfSpaces)) {
-          console.log("Error: Number of lessons must be greater than 0");
-          return;
-       }
+        console.log("Error: Number of lessons must be greater than 0");
+        return;
+      }
 
-      // This part below shouldn't be evaluated...
-      
-      this.postOrder(newOrder);
-
-      //this.cart
-      
-      // console.log("Length of the order: " + newOrder.length);
+      // this.postOrder(newOrder);
 
       for (let i = 0; i < this.cart.length; i++) {
-        this.updateNumberOfLessons(newOrder.id[i]);
+        console.log("WHY 1 ?!");
+        // this.updateNumberOfLessons(newOrder.id[i]);
+        this.updateNumberOfLessons(
+          newOrder.id[i]
+          //newOrder.numberOfSpaces
+        );
+        console.log("WHY?! 2 ");
         console.log("1) newOrder.id[i]: " + newOrder.id[i]);
         console.log("2) newOrder.id: " + newOrder.id);
       }
 
-      // this.updateNumberOfLessons();
-
-      //}
-      //);
+      this.postOrder(newOrder);
     },
 
-updateNumberOfLessons(id) {
-  fetch(`https://cst3145-wk186.herokuapp.com/collections/products/${id}`, {
-    method: "PUT",
-    body: JSON.stringify({ numberOfSpaces: this.numberOfSpaces - 1 }),
-    headers: {
-      "Content-Type": "application/json",
+    updateNumberOfLessons(id) {
+      try {
+        let product = null;
+        // Retrieve the product from the database
+        fetch(`https://cst3145-wk186.herokuapp.com/collections/products/${id}`)
+          .then((res) => res.json())
+          .then((data) => {
+            product = data;
+
+            console.log("product.subject +++ " + product._id);
+
+            let mongoID = product._id;
+
+            //const mongoID = product._id;
+
+            // Update the product in the database
+            fetch(
+              `https://cst3145-wk186.herokuapp.com/collections/products/${mongoID}`,
+              {
+                method: "PUT",
+                body: JSON.stringify({
+                  //numberOfSpaces: product.numberOfSpaces - count,
+                  numberOfSpaces: product.numberOfSpaces - 1,
+                }),
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              }
+            );
+          });
+
+        // Retrieve the updated product from the database
+        fetch(`https://cst3145-wk186.herokuapp.com/collections/products/${id}`)
+          .then((res) => res.json())
+          .then((data) =>
+            console.log("Number of spaces after: " + data.numberOfSpaces)
+          );
+      } catch (error) {
+        console.error(error);
+      }
     },
-  })
-    .then((response) => {
-      if (response.headers.get("Content-Type").includes("application/json")) {
-        return response.json();
-      } else {
-        throw new Error("Response is not JSON");
-      }
-    })
-    .then((responseData) => {
-      console.log("Response data:", responseData);
-      if (responseData.msg === "success") {
-        console.log("Number of lessons updated successfully");
-      } else {
-        console.error("Failed to update the number of lessons");
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-},
 
-
-    
     // Validation for the number of lessons being posted to the database
     validLessons(lessons) {
-        return lessons > 0;
+      return lessons > 0;
     },
-
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// A fetch that saves a new order with POST
@@ -233,15 +236,14 @@ updateNumberOfLessons(id) {
 
     //Input validation methods - improved
     validName(firstName) {
-        return /^[a-zA-Z]+$/.test(firstName);
-    },
-  
-    // Validation updated for the UK phone numbers
-    validNumber(phoneNumber) {
-        var phone_regex = /^\(?([0-9]{11})$/;
-        return phone_regex.test(phoneNumber);
+      return /^[a-zA-Z]+$/.test(firstName);
     },
 
+    // Validation updated for the UK phone numbers
+    validNumber(phoneNumber) {
+      var phone_regex = /^\(?([0-9]{12})$/;
+      return phone_regex.test(phoneNumber);
+    },
 
     //Cart count method
     cartCount(id) {
