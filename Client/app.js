@@ -131,8 +131,8 @@ let webstore = new Vue({
         this.validNumber(this.order.phoneNumber)
       );
     },
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //Submitting an order, updating the available spaces for the products submitted
     submitCheckoutForm() {
       const newOrder = {
         name: this.order.firstName,
@@ -151,69 +151,67 @@ let webstore = new Vue({
         return;
       }
 
-      // this.postOrder(newOrder);
-
-      for (let i = 0; i < this.cart.length; i++) {
-        console.log("WHY 1 ?!");
-        // this.updateNumberOfLessons(newOrder.id[i]);
-        this.updateNumberOfLessons(
-          newOrder.id[i]
-          //newOrder.numberOfSpaces
-        );
-        console.log("WHY?! 2 ");
-        console.log("1) newOrder.id[i]: " + newOrder.id[i]);
-        console.log("2) newOrder.id: " + newOrder.id);
-      }
-
-      this.postOrder(newOrder);
+      Promise.all(newOrder.id.map((id) => this.updateNumberOfLessons(id)))
+        .then((updatedProducts) => {
+          console.log("Response data (numberOfSpaces):" + updatedProducts);
+          this.postOrder(newOrder);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
 
-    updateNumberOfLessons(id) {
+    async updateNumberOfLessons(id) {
       try {
         let product = null;
+
         // Retrieve the product from the database
-        fetch(`https://cst3145-wk186.herokuapp.com/collections/products/${id}`)
-          .then((res) => res.json())
-          .then((data) => {
-            product = data;
+        const res1 = await fetch(
+          `https://cst3145-wk186.herokuapp.com/collections/products/${id}`
+        );
+        const data1 = await res1.json();
+        product = data1;
+        console.log("product.subject from MongoDB: " + product.subject);
 
-            console.log("product.subject +++ " + product._id);
-
-            let mongoID = product._id;
-
-            //const mongoID = product._id;
-
-            // Update the product in the database
-            fetch(
-              `https://cst3145-wk186.herokuapp.com/collections/products/${mongoID}`,
-              {
-                method: "PUT",
-                body: JSON.stringify({
-                  //numberOfSpaces: product.numberOfSpaces - count,
-                  numberOfSpaces: product.numberOfSpaces - 1,
-                }),
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              }
-            );
-          });
+        // Update the product in the database
+        const res2 = await fetch(
+          `https://cst3145-wk186.herokuapp.com/collections/products/${product._id}`,
+          {
+            method: "PUT",
+            body: JSON.stringify({
+              numberOfSpaces: product.numberOfSpaces - 1,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         // Retrieve the updated product from the database
-        fetch(`https://cst3145-wk186.herokuapp.com/collections/products/${id}`)
-          .then((res) => res.json())
-          .then((data) =>
-            console.log("Number of spaces after: " + data.numberOfSpaces)
-          );
+        const res3 = await fetch(
+          `https://cst3145-wk186.herokuapp.com/collections/products/${id}`
+        );
+        const data3 = await res3.json();
+        console.log(
+          "Current number of available spaces: " + data3.numberOfSpaces
+        );
+        return data3.numberOfSpaces;
       } catch (error) {
         console.error(error);
       }
+    },
+    sleep(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
     },
 
     // Validation for the number of lessons being posted to the database
     validLessons(lessons) {
       return lessons > 0;
     },
+
+    // sleep(ms) {
+    //   return new Promise((resolve) => setTimeout(resolve, ms));
+    // },
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// A fetch that saves a new order with POST
@@ -227,7 +225,9 @@ let webstore = new Vue({
       })
         .then((response) => response.json())
         .then((responseData) => {
-          console.log("Response data " + responseData);
+          console.log(
+            "Response data (numberOfSpaces):" + responseData.numberOfSpaces
+          );
         })
         .catch((error) => {
           console.log(error);
