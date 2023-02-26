@@ -12,7 +12,7 @@
           "src": "assets/icon-smaller.png",
           "sizes":"192x192",
           "type":"image/png"
-      },
+      }
     ],
   "start_url": "index.html",
   "display": "fullscreen",
