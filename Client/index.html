@@ -27,6 +27,13 @@
   <!-- Web manifest   -->
   <link rel="manifest" href="webstore.webmanifest">
   
+  <!-- Service worker   -->
+  <script>
+    if('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    };
+  </script>
+  
 </head>
 
 <body>
