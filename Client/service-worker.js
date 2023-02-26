@@ -1,5 +1,5 @@
-var cacheName = 'webstore-v1';
-var cacheFiles = [
+const cacheName = 'webstore-v1';
+const cacheFiles = [
   'index.html',
   'app.js',
   'css/style.css',
@@ -19,28 +19,22 @@ var cacheFiles = [
   'assets/robot.svg',
 ];
 
-self.addEventListener("install", function (e) {
-    console.log("[Service Worker] Install");
-    e.waitUntil(
-        caches.open(cacheName).then(function (cache) {
-            console.log("[Service Worker] Caching all the files");
-            return cache.addAll(cacheFiles);
-        })
-    );
+self.addEventListener("install", async (event) => {
+  console.log("[Service Worker] Install");
+  const cache = await caches.open(cacheName);
+  console.log("[Service Worker] Caching all the files");
+  await cache.addAll(cacheFiles);
 });
 
-self.addEventListener('fetch', function (e) {
-  e.respondWith(
-    // Check if the cache has the file
-    caches.match(e.request).then(function (r) {
-      // Download the file if it is not in the cache
-      return r || fetch(e.request).then(function(response) {
-        // Add the new file to cache
-        return caches.open(cacheName).then(function(cache) {
-          cache.put(e.request, response.clone());
-          return response;
-        });
-      });
-    })
-  );
+self.addEventListener('fetch', event => {
+  event.respondWith(async function() {
+    const cachedResponse = await caches.match(event.request);
+    if (cachedResponse) {
+      return cachedResponse;
+    }
+    const networkResponse = await fetch(event.request);
+    const cache = await caches.open(cacheName);
+    await cache.put(event.request, networkResponse.clone());
+    return networkResponse;
+  }());
 });
