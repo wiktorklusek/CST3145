@@ -31,13 +31,12 @@ self.addEventListener('install', (e) => {
 
 self.addEventListener('fetch', function (e) {
   e.respondWith(
+    // Check if thge cache has the file
     caches.match(e.request).then(function (r) {
+      console.log('[Service Worker] Fetched resource ' + e.request.url);
     // Download the file if it is not in the cache
+    // 'r' is the matching file if it exists in the cache
     return r
-    }))
-});
-
-// Using the cached files
-self.addEventListener('fetch', (e) => {
-  console.log('[Service Worker] Fetched resource ' + e.request.url);
+    })
+  );
 });
