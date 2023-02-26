@@ -37,3 +37,7 @@ self.addEventListener('fetch', function (e) {
     }))
 });
 
+// Using the cached files
+self.addEventListener('fetch', (e) => {
+  console.log('[Service Worker] Fetched resource ' + e.request.url);
+});
