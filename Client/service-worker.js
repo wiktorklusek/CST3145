@@ -28,3 +28,12 @@ self.addEventListener('install', (e) => {
     })
    );
 });
+
+self.addEventListener('fetch', function (e) {
+  e.respondWith(
+    caches.match(e.request).then(function (r) {
+    // Download the file if it is not in the cache
+    return r
+    }))
+});
+
