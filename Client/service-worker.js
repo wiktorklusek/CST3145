@@ -37,7 +37,7 @@ self.addEventListener('fetch', function (e) {
       return r || fetch(e.request).then(function(response) {
         // Add the new file to cache
         return caches.open(cacheName).then(function(cache) {
-          cahce.put(e.request, response.clone());
+          cache.put(e.request, response.clone());
           return response;
         });
       });
