@@ -8,9 +8,18 @@
     "build": "vite build",
     "preview": "vite preview"
   },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.3.0",
+    "@fortawesome/free-brands-svg-icons": "^6.3.0",
+    "@fortawesome/free-regular-svg-icons": "^6.3.0",
+    "@fortawesome/free-solid-svg-icons": "^6.3.0",
+    "@fortawesome/vue-fontawesome": "^2.0.10",
+    "vue": "^2.7.7"
+  },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^4.1.0",
-    "vite": "^4.2.0",
-    "vue": "^3.2.47"
+    "@vitejs/plugin-legacy": "^2.0.0",
+    "@vitejs/plugin-vue2": "^1.1.2",
+    "terser": "^5.14.2",
+    "vite": "^3.0.2"
   }
 }
