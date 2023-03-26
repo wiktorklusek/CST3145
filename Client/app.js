@@ -19,7 +19,6 @@ let webstore = new Vue({
 
     // Used for storing the specific type of sorting(price, location, etc...)
     sortValue: "subject",
-    maxCookingTime: null,
     sortClassesBy: "",
 
     // Names to be more specific below:
