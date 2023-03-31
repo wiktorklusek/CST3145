@@ -1,8 +1,10 @@
 <template>
   <div class="col-md-10">
     <div class="row">
+      <!-- loop through the lessonList array and create a card for each lesson -->
       <div class="col-sm-6 col-md-6 col-lg-4 mt-2" v-for="lesson in lessonList">
         <div class="card card-width rounded-0 shadow-sm">
+          <!-- display lesson details -->
           <div class="card-body d-flex justify-content-between">
             <div>
               <span class="card-text fs-14">
@@ -18,16 +20,19 @@
                 Spaces: <b class="card-subtitle mb-2 fs-14">{{ lesson.numberOfSpaces }}</b>
               </span><br>
               <span class="card-text fs-18">
+                <!-- display lesson icon using Font Awesome -->
                 <i v-bind:class="lesson.icon"></i>
               </span><br>
+              <!-- button to add lesson to cart -->
               <button v-bind:class="{ disabled: lesson.numberOfSpaces <= 0 }"
                 @click="addToCart(lesson._id)" class="card-link btn btn-dark btn-sm mt-md-5 px-lg-2">
                 <i class="fas fa-plus mx-1"></i>
-                <!-- <span class="d-xl-none">Add</span> -->
+                <!-- display text depending on screen size -->
                 <span class="d-none d-xl-inline">Add to cart</span>
               </button>
             </div>
             <br>
+            <!-- display lesson image -->
             <img v-bind:src="lesson.image" class="img-fluid border rounded"
               style="height: 300px; width: 300px;">
               <br>
@@ -37,7 +42,6 @@
     </div>
   </div>
 </template>
-
 
 <script>
 export default {

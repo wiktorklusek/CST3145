@@ -6,6 +6,7 @@
         <div class="card card-width rounded-0 shadow-sm">
           <div class="card-body d-flex justify-content-between">
             <div>
+              <!-- Display product information -->
               <span class="card-text fs-14">Subject:
                 <b class="card-subtitle mb-2 fs-14">{{ item.lesson.subject }}</b>
               </span>
@@ -22,11 +23,13 @@
                 <b class="card-subtitle mb-2 fs-14">{{ item.numberOfSpaces }}</b>
               </span>
               <br />
+              <!-- Remove button for the product -->
               <span class="card-text fs-18"><i v-bind:class="item.lesson.icon"></i></span><br />
                         <button @click="removeFromCart(item.lessonId)" class="card-link btn btn-dark btn-sm mt-md-5 px-lg-2">
             <i class="fas fa-minus mx-1"></i> Remove
           </button>
         </div>
+        <!-- Display product image -->
         <img v-bind:src="item.lesson.image" v-bind:alt="item.lesson.altText" class="img-fluid border rounded"
           style="height: 300px; width: 300px;" />
       </div>
@@ -35,6 +38,7 @@
 </div>
 <!-- Checkout DIVs -->
 <hr>
+<!-- Checkout form for user information -->
 <p class="text-center mt-5">Checkout</p>
 <form>
   <div class="row justify-content-center">
@@ -46,6 +50,7 @@
     </div>
   </div>
 </form>
+<!-- Checkout button to confirm purchase -->
 <div class="row mt-5 text-center">
   <div class="col-12">
     <button v-on:click="showConfirmationDialog" class="card-link btn btn-dark btn-sm px-3">
