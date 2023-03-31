@@ -1,8 +1,11 @@
 <template>
+  <!-- The root container element -->
   <div class="container py-5 px-md-5" id="app">
+    <!-- The website name -->
     <p class="text-center">{{ sitename }}</p>
     <hr>
 
+    <!-- The checkout button -->
     <div class="row mb-3 text-center">
       <div class="col-8">
         <br>
@@ -13,9 +16,12 @@
         <br>
       </div>
     </div>
-<br>
+    <br>
+
+    <!-- The main component section -->
     <div class="row pt-2">
       <main class="d-flex justify-content-center">
+        <!-- The current view component -->
         <component :is="currentView" :lessonList="lessons" :baseURL="baseURL" @add-to-cart="addToCart"
           @remove-from-cart="removeFromCart" :cart="cart" />
       </main>
